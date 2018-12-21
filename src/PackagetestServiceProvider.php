@@ -29,6 +29,7 @@ class PackagetestServiceProvider extends ServiceProvider
     public function register()
     {
          // 单例绑定服务
+        require_once __DIR__."./function.php";
         $this->app->singleton('packagetest', function ($app) {
             return new config\Packagetest($app['config']);
         });

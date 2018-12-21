@@ -27,6 +27,7 @@ class Packagetest
      * @return string
      */
     public  function test_rtn($msg = ''){
+        //return 1;
         return $this->config;
     }
 }
