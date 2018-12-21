@@ -1,0 +1,16 @@
+{
+
+	"name": "xiaozhu/admin",
+	"authors": [
+        {
+            "name": "xiaozhu",
+            "email": "260600866@qq.com"
+        }
+    ],
+    "autoload": {
+   	 "psr-4": {
+        "Xiaozhu\\": "src/"
+    	}
+	},
+    "require": {}
+}
