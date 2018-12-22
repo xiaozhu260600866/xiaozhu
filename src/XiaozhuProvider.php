@@ -42,6 +42,13 @@ class XiaozhuProvider extends ServiceProvider
         $this->app->singleton('redisHistory', function ($app) {
             return new Redis\RedisHistoryClass($app['config']);
         });
+         $this->app->singleton('redisFormId', function ($app) {
+            return new Redis\RedisFormIdClass($app['config']);
+        });
+          $this->app->singleton('redisToken', function ($app) {
+            return new Redis\RedisTokenClass($app['config']);
+        });
+          
          
     }
     /**
@@ -52,7 +59,7 @@ class XiaozhuProvider extends ServiceProvider
     public function provides()
     {
         // 因为延迟加载 所以要定义 provides 函数 具体参考laravel 文档
-        return ['app','corp','redisAuth','redisHistory'];
+        return ['app','corp','redisAuth','redisHistory','redisFormId','redisToken'];
     }
 }
 ?>

@@ -1,9 +1,17 @@
-<?php namespace App\Http\Controllers\Redis;
+<?php namespace Xiaozhu\Redis;
 use Illuminate\Support\Facades\Redis;
 use Auth;
+use Illuminate\Config\Repository;
 class RedisFormIdClass{
 	/*取redis 的表为user_id 全部数据*/
-	public static function getAll($user_id){
+	 public function __construct(Repository $config)
+    {
+        
+        $this->config = $config;
+       
+    }
+   
+	public  function getAll($user_id){
 		$lists = Redis::hgetall($user_id);
 		
 		return $lists;
@@ -13,7 +21,7 @@ class RedisFormIdClass{
 	  参数二：参增加的数据,键为数据的键，值为数据的值
 	  参数三：key为product_id;
 	*/
-	public static function getAdd($user_id,$form_id){
+	public  function getAdd($user_id,$form_id){
 		//$redis->hmset('hash1', array('key3' => 'v3', 'key4' => 'v4'));
 	    if($form_id == "the formId is a mock one") return true;
 		$key = $form_id;
@@ -22,7 +30,7 @@ class RedisFormIdClass{
 	}
 
 	/*参数一:表名*/
-	public static function getDel($user_id){
+	public  function getDel($user_id){
 		$lists = Redis::hgetall($user_id);
 		foreach ($lists as $key => $value) {
 			Redis::hdel($user_id,$key);
@@ -31,13 +39,13 @@ class RedisFormIdClass{
 	}
 	/*参数一:表名*/
 	/*参数二：键名*/
-	public static function isExists($user_id,$form_id){
+	public  function isExists($user_id,$form_id){
 		return  Redis::hexists($user_id,$form_id);
 	}
 	//删除一个商品;
 	//参数一表名,
 	//键名
-	public static function getDelOne($user_id,$form_id){
+	public  function getDelOne($user_id,$form_id){
 		Redis::hdel($user_id,$form_id);
 	}
 
