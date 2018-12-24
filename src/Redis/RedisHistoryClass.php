@@ -1,6 +1,6 @@
 <?php namespace Xiaozhu\Redis;
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Config\Repository;
+
 use Auth;
 class RedisHistoryClass{
 	protected   $database='history_card_'; //键名前缀 
@@ -9,11 +9,11 @@ class RedisHistoryClass{
 	  参数二：参增加的数据,键为数据的键，值为数据的值
 	  参数三：key为product_id;
 	*/
-	    public function __construct(Repository $config)
+	    public function __construct($config)
     {
         
         $this->config = $config;
-        
+         $this->database = $config["redis_history_database"];
     }
 	 
 	public  function getAdd($tablename,$request,$lists){

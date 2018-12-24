@@ -1,10 +1,9 @@
 <?php namespace Xiaozhu\Redis;
 use Illuminate\Support\Facades\Redis;
 use Auth;
-use Illuminate\Config\Repository;
 class RedisFormIdClass{
 	/*取redis 的表为user_id 全部数据*/
-	 public function __construct(Repository $config)
+	 public function __construct($config)
     {
         
         $this->config = $config;

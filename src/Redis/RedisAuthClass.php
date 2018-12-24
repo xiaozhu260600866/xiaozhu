@@ -1,14 +1,14 @@
 <?php namespace Xiaozhu\Redis;
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Config\Repository;
 use Auth;
 class RedisAuthClass{
 	protected   $database='card_'; //键名前缀 
 	protected $redisHistory ;
-	  public function __construct(Repository $config)
+	  public function __construct($config)
     {
         
         $this->config = $config;
+        $this->database = $config["redis_auth_database"];
         $this->redisHistory = new RedisHistoryClass( $this->config);
     }
    

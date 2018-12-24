@@ -1,13 +1,14 @@
 <?php namespace Xiaozhu\Redis;
 use Illuminate\Support\Facades\Redis;
 use Auth;
-use Illuminate\Config\Repository;
+
 class RedisTokenClass{
 	protected   $database='card_token'; //键名前缀 
-	public function __construct(Repository $config)
+	public function __construct($config)
     {
         
         $this->config = $config;
+        $this->database = $config["redis_token_database"];
        
     }
 

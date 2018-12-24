@@ -30,24 +30,36 @@ class XiaozhuProvider extends ServiceProvider
     {
          // 单例绑定服务
         require_once __DIR__."/function.php";
+        $config =  require_once base_path('config/xiaozhu.php');
+        $GLOBALS["config"] = $config;
         $this->app->singleton('app', function ($app) {
-            return new Wechat\app($app['config']);
+
+            return new Wechat\app( $GLOBALS["config"]);
         });
         $this->app->singleton('corp', function ($app) {
-            return new Wechat\corp($app['config']);
+            return new Wechat\corp( $GLOBALS["config"]);
         });
         $this->app->singleton('redisAuth', function ($app) {
-            return new Redis\RedisAuthClass($app['config']);
+            return new Redis\RedisAuthClass( $GLOBALS["config"]);
         });
         $this->app->singleton('redisHistory', function ($app) {
-            return new Redis\RedisHistoryClass($app['config']);
+            return new Redis\RedisHistoryClass( $GLOBALS["config"]);
         });
          $this->app->singleton('redisFormId', function ($app) {
-            return new Redis\RedisFormIdClass($app['config']);
+            return new Redis\RedisFormIdClass( $GLOBALS["config"]);
         });
           $this->app->singleton('redisToken', function ($app) {
-            return new Redis\RedisTokenClass($app['config']);
+            return new Redis\RedisTokenClass( $GLOBALS["config"]);
         });
+        $this->app->singleton('qiniu', function ($app) {
+          
+            return new Qiniu\qiniu( $GLOBALS["config"]);
+        });
+        $this->app->singleton('sms', function ($app) {
+          
+            return new Sms\SendTemplateSMS( $GLOBALS["config"]);
+        });
+
           
          
     }
@@ -59,7 +71,7 @@ class XiaozhuProvider extends ServiceProvider
     public function provides()
     {
         // 因为延迟加载 所以要定义 provides 函数 具体参考laravel 文档
-        return ['app','corp','redisAuth','redisHistory','redisFormId','redisToken'];
+        return ['app','corp','redisAuth','redisHistory','redisFormId','redisToken','qiniu','sms'];
     }
 }
 ?>
