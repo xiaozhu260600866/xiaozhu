@@ -19,7 +19,8 @@ class RedisTokenClass{
 	public  function getAdd($user_id){
 		//$redis->hmset('hash1', array('key3' => 'v3', 'key4' => 'v4'));
 		$key = $this->database;
-		Redis::hset($key,$user_id,date("Y-m-d"));
+		//Redis::hset($key,$user_id,date("Y-m-d"));
+		Redis::hset($key,$user_id,strtotime(date('Y-m-d H:i:s')));
 	}
 	public  function getDel($tablename,$model){
 		return  Redis::hdel($this->database.$tablename,$model->id);

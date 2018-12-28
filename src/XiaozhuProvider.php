@@ -36,8 +36,16 @@ class XiaozhuProvider extends ServiceProvider
 
             return new Wechat\app( $GLOBALS["config"]);
         });
+         $this->app->singleton('wechatOpen', function ($app) {
+
+            return new Wechat\wechatOpen( $GLOBALS["config"]);
+        });
+
         $this->app->singleton('corp', function ($app) {
             return new Wechat\corp( $GLOBALS["config"]);
+        });
+         $this->app->singleton('workOpen', function ($app) {
+            return new Wechat\workOpen( $GLOBALS["config"]);
         });
         $this->app->singleton('redisAuth', function ($app) {
             return new Redis\RedisAuthClass( $GLOBALS["config"]);
@@ -71,7 +79,7 @@ class XiaozhuProvider extends ServiceProvider
     public function provides()
     {
         // 因为延迟加载 所以要定义 provides 函数 具体参考laravel 文档
-        return ['app','corp','redisAuth','redisHistory','redisFormId','redisToken','qiniu','sms'];
+        return ['app','corp','redisAuth','redisHistory','redisFormId','redisToken','qiniu','sms','workOpen','wechatOpen'];
     }
 }
 ?>

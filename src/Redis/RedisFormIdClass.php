@@ -11,6 +11,7 @@ class RedisFormIdClass{
     }
    
 	public  function getAll($user_id){
+		$user_id = "formId_".$user_id;
 		$lists = Redis::hgetall($user_id);
 		
 		return $lists;
@@ -23,13 +24,14 @@ class RedisFormIdClass{
 	public  function getAdd($user_id,$form_id){
 		//$redis->hmset('hash1', array('key3' => 'v3', 'key4' => 'v4'));
 	    if($form_id == "the formId is a mock one") return true;
-		$key = $form_id;
-		
+		$key = date("Y-m-d H:i:s");
+		$user_id = "formId_".$user_id;
 		Redis::hset($user_id,$key,$form_id);
 	}
 
 	/*参数一:表名*/
 	public  function getDel($user_id){
+		$user_id = "formId_".$user_id;
 		$lists = Redis::hgetall($user_id);
 		foreach ($lists as $key => $value) {
 			Redis::hdel($user_id,$key);
@@ -39,12 +41,14 @@ class RedisFormIdClass{
 	/*参数一:表名*/
 	/*参数二：键名*/
 	public  function isExists($user_id,$form_id){
+		$user_id = "formId_".$user_id;
 		return  Redis::hexists($user_id,$form_id);
 	}
 	//删除一个商品;
 	//参数一表名,
 	//键名
 	public  function getDelOne($user_id,$form_id){
+		$user_id = "formId_".$user_id;
 		Redis::hdel($user_id,$form_id);
 	}
 
