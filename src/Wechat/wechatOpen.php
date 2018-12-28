@@ -37,8 +37,9 @@ class wechatOpen
       $data=array(
           "component_appid"=>$wechat['config']["app_id"],
           "component_appsecret"=>$wechat['config']["secret"],
-          "component_verify_ticket"=>Redis::hget("card_website","componentVerifyTicket")
+          "component_verify_ticket"=>Redis::hget($this->config['componentVerifyTicket'],"componentVerifyTicket")
         );
+    
       return json_decode(request_post($url,json_encode($data)))->component_access_token;
   }
 
